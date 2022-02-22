@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Primary Meta Tags -->
+    <title>Zeppelin Case Stats</title>
+    <meta name="title" content="Zeppelin Case Stats">
+    <meta name="description" content="A website used to see how your moderators perform individually.">
+    <meta name="theme-color" content="#5865F2">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zeppelin-stats.leonlarsson.com">
+    <meta property="og:title" content="Zeppelin Case Stats">
+    <meta property="og:description" content="A website used to see how your moderators perform individually.">
+    <!-- <meta property="og:image" content="https://logsorter.net/assets/images/embed.png"> -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zeppelin-stats.leonlarsson.com">
+    <meta property="twitter:title" content="Zeppelin Case Stats">
+    <meta property="twitter:description" content="A website used to see how your moderators perform individually.">
+    <!-- <meta property="twitter:image" content="https://logsorter.net/assets/images/embed.png"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- <link rel="icon" href="https://logsorter.net/assets/images/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://logsorter.net/assets/images/icon.ico" type="image/x-icon"> -->
+
+    <link href="./assets/styles/tabulator_semantic.css" rel="stylesheet">
+    <!-- https://github.com/olifolkerd/tabulator/blob/master/dist/css/tabulator_semanticui.min.css -->
+    <script type="text/javascript" src="./assets/js/tabulator.js"></script>
+    <!-- https://github.com/olifolkerd/tabulator/blob/master/dist/js/tabulator.min.js -->
+    <script type="module" src="./assets/js/index.js"></script>
+</head>
+
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 3em;
+        }
+
+        .text {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .button {
+            color: white;
+            border-radius: 3px;
+            width: auto;
+            height: 30px;
+            font-family: "Roboto", sans-serif;
+            border: 0px;
+        }
+
+        .buttonBlue {
+            background-color: #5865f2;
+        }
+
+        .buttonBlue:hover {
+            background-color: #4752c4;
+            cursor: pointer;
+        }
+
+        .buttonBlue:active {
+            background-color: #3c45a5;
+        }
+    </style>
+
+    <div class="upper-options">
+        <input id="allModsCheckbox" type="checkbox" onchange="checkBoxChecked()">
+        <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text">Look for all mods
+            found (Experimental - Populates ID and name automatically by reading the data)</label>
+        <input hidden id="modsUpload" type="file">
+        <input hidden id="caseUpload" type="file">
+        <div id="modsUploadButton" class="text">
+            <button class="button buttonBlue" type="file" onclick="clickOpenFileButton1()">1. Upload Mod List
+            </button>
+            - Upload a JSON array that looks like: <code style="font-size: 1.2em">[{ "id": "MOD_ID1", "name": "MOD_NAME1" }, { "id": "MOD_ID2", "name":
+                    "MOD_NAME2" }]</code>. This will only pull data on those mods. Names can be whatever.
+        </div>
+        <div hidden id="caseUploadButton" class="text">
+            <button class="button buttonBlue" type="file" onclick="clickOpenFileButton2()">2. Upload
+                Zeppelin Cases
+            </button>
+            - Export your case data at <code
+                style="font-size: 1.2em">https://zeppelin.gg/dashboard/guilds/{guild_id}/import-export</code>, then
+            upload
+            that file
+            unedited.
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
+    </div>
+    <button class="button buttonBlue" id="downloadButton">Download as .json</button>
+
+    <script>
+
+        function checkBoxChecked() {
+            const checkbox = document.getElementById("allModsCheckbox");
+            const modsUploadButton = document.getElementById("modsUploadButton");
+            const caseUploadButton = document.getElementById("caseUploadButton");
+
+            modsUploadButton.hidden = checkbox.checked ? true : false;
+            caseUploadButton.hidden = checkbox.checked ? false : true;
+        }
+
+        function clickOpenFileButton1() {
+            document.getElementById("modsUpload").click();
+        }
+
+        function clickOpenFileButton2() {
+            document.getElementById("caseUpload").click();
+        }
+    </script>
+
+</body>
+
+</html>
