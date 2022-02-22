@@ -49,9 +49,15 @@ const coolTable = new Tabulator(table, {
     layout: "fitColumns",
     // footerElement: "<button class='button buttonBlue'>Custom Button</button>",
 
+    // By default, sort by cases, descending
+    initialSort: [
+        { column: "cases", dir: "desc" }
+    ],
+
     columnDefaults: {
         headerTooltip: true,
         tooltip: cell => {
+            // If the cell is missing this value, it's probably a sum cell, so return
             if (!cell.getColumn()._column.definition.title) return;
             return `${cell.getRow()._row.data.name} (${cell.getRow()._row.data.id}): ${cell.getColumn()._column.definition.title} - ${cell.getValue()}`;
         },
