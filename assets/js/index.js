@@ -24,6 +24,19 @@ const CASE_TYPES = {
     SOFT_BAN: 9
 };
 
+const calcSumNumbers = values => {
+    let sum = 0;
+    values.forEach(value => {
+        const num = value.match(/(\d+) \(/)[1];
+        sum += parseInt(num);
+    });
+    return sum + " total";
+}
+
+const calcSumMods = values => {
+    return values.length + " moderators";
+}
+
 // Do not use pagination if the localStorage setting overrides it (is set to false)
 const usePagination = !localStorage.getItem("usePagination") || localStorage.getItem("usePagination") === "true" ? true : false;
 
@@ -39,6 +52,7 @@ const coolTable = new Tabulator(table, {
     columnDefaults: {
         headerTooltip: true,
         tooltip: cell => {
+            if (!cell.getColumn()._column.definition.title) return;
             return `${cell.getRow()._row.data.name} (${cell.getRow()._row.data.id}): ${cell.getColumn()._column.definition.title} - ${cell.getValue()}`;
         },
     },
@@ -47,21 +61,21 @@ const coolTable = new Tabulator(table, {
         {
             title: "Basic Info",
             columns: [
-                { title: "ID", field: "id", headerFilter: true, sorter: "number" },
+                { title: "ID", field: "id", headerFilter: true, sorter: "number", topCalc: calcSumMods },
                 { title: "Name", field: "name", headerFilter: true }
             ]
         },
         {
             title: "Case Stats",
             columns: [
-                { title: "Cases", field: "cases", sorter: "number" },
-                { title: "Bans", field: "caseCounts.BAN", sorter: "number" },
-                { title: "Unbans", field: "caseCounts.UNBAN", sorter: "number" },
-                { title: "Notes", field: "caseCounts.NOTE", sorter: "number" },
-                { title: "Warnings", field: "caseCounts.WARNING", sorter: "number" },
-                { title: "Kicks", field: "caseCounts.KICK", sorter: "number" },
-                { title: "Mutes", field: "caseCounts.MUTE", sorter: "number" },
-                { title: "Unmutes", field: "caseCounts.UNMUTE", sorter: "number" }
+                { title: "Cases", field: "cases", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Bans", field: "caseCounts.BAN", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Unbans", field: "caseCounts.UNBAN", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Notes", field: "caseCounts.NOTE", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Warnings", field: "caseCounts.WARNING", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Kicks", field: "caseCounts.KICK", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Mutes", field: "caseCounts.MUTE", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Unmutes", field: "caseCounts.UNMUTE", sorter: "number", topCalc: calcSumNumbers }
             ]
         }
     ]
