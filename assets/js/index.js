@@ -36,7 +36,7 @@ const calcSumNumbers = values => {
         const num = value.match(/(\d+) \(/)[1];
         sum += parseInt(num);
     });
-    return sum + " total";
+    return sum;
 }
 
 const calcSumMods = values => {
