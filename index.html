@@ -29,8 +29,19 @@
 
     <link href="./assets/styles/tabulator_semantic.css" rel="stylesheet">
     <!-- https://github.com/olifolkerd/tabulator/blob/master/dist/css/tabulator_semanticui.min.css -->
+
     <script type="text/javascript" src="./assets/js/tabulator.js"></script>
     <!-- https://github.com/olifolkerd/tabulator/blob/master/dist/js/tabulator.min.js -->
+
+    <script type="text/javascript" src="./assets/js/xlsx.js"></script>
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.2/xlsx.min.js -->
+
+    <script type="text/javascript" src="./assets/js/jspdf.js"></script>
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js -->
+
+    <script type="text/javascript" src="./assets/js/jspdf-plugin.js"></script>
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js -->
+
     <script type="module" src="./assets/js/index.js"></script>
 </head>
 
@@ -96,7 +107,12 @@
     <div class="container">
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
     </div>
-    <button class="button buttonBlue" id="downloadButton">Download as .json</button>
+    <span class="text">Download as:</span>
+    <button class="button buttonBlue" id="downloadButtonJSON">.json</button>
+    <button class="button buttonBlue" id="downloadButtonCSV">.csv</button>
+    <button class="button buttonBlue" id="downloadButtonHTML">.html</button>
+    <button class="button buttonBlue" id="downloadButtonXLSX">.xlsx</button>
+    <button class="button buttonBlue" id="downloadButtonPDF">.pdf</button>
 
     <script>
 

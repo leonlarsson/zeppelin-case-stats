@@ -9,7 +9,11 @@ const casesSinceLaunchButton = document.getElementById("casesSinceLaunchButton")
 const totalCasesAdminsButton = document.getElementById("totalCasesAdminsButton");
 const casesSinceLaunchAdminsButton = document.getElementById("casesSinceLaunchAdminsButton");
 const table = document.getElementById("caseTable");
-const downloadButton = document.getElementById("downloadButton");
+const downloadButtonJSON = document.getElementById("downloadButtonJSON");
+const downloadButtonCSV = document.getElementById("downloadButtonCSV");
+const downloadButtonHTML = document.getElementById("downloadButtonHTML");
+const downloadButtonXLSX = document.getElementById("downloadButtonXLSX");
+const downloadButtonPDF = document.getElementById("downloadButtonPDF");
 
 // Set Zeppelin case types
 const CASE_TYPES = {
@@ -154,6 +158,26 @@ caseUpload.addEventListener("change", event => {
 
 
 // Download table data as JSON
-downloadButton.addEventListener("click", () => {
-    coolTable.download("json", `mod_data_${new Date().toUTCString()}.json`);
+downloadButtonJSON.addEventListener("click", () => {
+    coolTable.download("json", `case_stats.json`);
+});
+
+// Download table data as CSV
+downloadButtonCSV.addEventListener("click", () => {
+    coolTable.download("csv", `case_stats.csv`);
+});
+
+// Download table data as HTML
+downloadButtonHTML.addEventListener("click", () => {
+    coolTable.download("html", `case_stats.html`, { style: true });
+});
+
+// Download table data as XLSX
+downloadButtonXLSX.addEventListener("click", () => {
+    coolTable.download("xlsx", `case_stats.xlsx`, { sheetName: "Case Stats" });
+});
+
+// Download table data as PDF
+downloadButtonPDF.addEventListener("click", () => {
+    coolTable.download("pdf", `case_stats.pdf`, { title: `Case Stats Report (${new Date().toUTCString()})` });
 });
