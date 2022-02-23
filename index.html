@@ -48,24 +48,30 @@
 
 <body>
 
-    <h2 class="text"><a style="text-decoration: underline; color: #000" href="https://zeppelin.gg/">Zeppelin</a> Case
-        Stats - Made by <a style="text-decoration: underline; color: #000" href="https://twitter.com/mozzyfx">Mozzy</a>
+    <h2 class="text"><a style="text-decoration: underline; color: #000" href="https://zeppelin.gg/"
+            title="A link to Zeppelin's website.">Zeppelin</a> Case
+        Stats - Made by <a style="text-decoration: underline; color: #000" href="https://twitter.com/mozzyfx"
+            title="A link to Mozzy's Twitter.">Mozzy</a>
     </h2>
 
     <div class="upper-options">
         <input id="allModsCheckbox" type="checkbox" onchange="checkBoxChecked()">
-        <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text">Look for all mods
+        <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text">Look
+            for all mods
             found (Experimental - Populates ID and name automatically by reading the data)</label>
         <input hidden id="modsUpload" type="file">
         <input hidden id="caseUpload" type="file">
         <div id="modsUploadButton" class="text">
-            <button class="button buttonBlue" type="file" onclick="clickOpenFileButton1()">1. Upload Mod List
-            </button>
+            <button class="button buttonBlue" type="file"
+                title="Opens the file browser for you to select a file that has a valid JSON array of data."
+                onclick="clickOpenFileButton1()">1. Upload Mod List</button>
             - Upload a JSON array that looks like: <code style="font-size: 1.2em">[{ "id": "MOD_ID1", "name": "MOD_NAME1" }, { "id": "MOD_ID2", "name":
                     "MOD_NAME2" }]</code>. This will only pull data on those mods. Names can be whatever.
         </div>
         <div hidden id="caseUploadButton" class="text">
-            <button class="button buttonBlue" type="file" onclick="clickOpenFileButton2()">2. Upload
+            <button class="button buttonBlue" type="file"
+                title="Opens the file browser for you to select a Zeppelin case export file. Anything with matching structure will also work."
+                onclick="clickOpenFileButton2()">2. Upload
                 Zeppelin Cases
             </button>
             - Export your case data at <code
@@ -73,18 +79,24 @@
             upload
             that file.
         </div>
-        <button hidden class="button buttonRed" style="margin-top: 1em;" id="resetButton">Reset</button>
+        <button hidden class="button buttonRed" style="margin-top: 1em;" id="resetButton"
+            title="Refreshes the window.">Reset</button>
     </div>
 
     <div class="container">
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
     </div>
     <span class="text">Download as:</span>
-    <button class="button buttonBlue" id="downloadButtonJSON">json</button>
-    <button class="button buttonBlue" id="downloadButtonCSV">csv</button>
-    <button class="button buttonBlue" id="downloadButtonHTML">html</button>
-    <button class="button buttonBlue" id="downloadButtonXLSX">xlsx</button>
-    <button class="button buttonBlue" id="downloadButtonPDF">pdf</button>
+    <button class="button buttonBlue" id="downloadButtonJSON"
+        title="Downloads the current table data as JSON.">json</button>
+    <button class="button buttonBlue" id="downloadButtonCSV"
+        title="Downloads the current table data as CSV.">csv</button>
+    <button class="button buttonBlue" id="downloadButtonHTML"
+        title="Downloads the current table data as HTML.">html</button>
+    <button class="button buttonBlue" id="downloadButtonXLSX"
+        title="Downloads the current table data as XLSX (Excel/Google Sheets compatible).">xlsx</button>
+    <button class="button buttonBlue" id="downloadButtonPDF"
+        title="Downloads the current table data as PDF (with some styling).">pdf</button>
 
     <script>
 
