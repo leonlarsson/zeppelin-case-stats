@@ -52,7 +52,7 @@ const coolTable = new Tabulator(table, {
     paginationSize: 20,
     paginationCounter: "rows",
     placeholder: "Upload some data for me.",
-    layout: "fitColumns",
+    layout: "fitDataStretch", // This fills the width and creates a scrollbar before it gets mushy
     // footerElement: "<button class='button buttonBlue'>Custom Button</button>",
 
     // By default, sort by cases, descending
