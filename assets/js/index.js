@@ -1,3 +1,4 @@
+const helpText = document.getElementById("helpText");
 const allModsCheckbox = document.getElementById("allModsCheckbox");
 const allModsCheckboxText = document.getElementById("allModsCheckboxText");
 const modsUploadButton = document.getElementById("modsUploadButton");
@@ -153,6 +154,7 @@ caseUpload.addEventListener("change", event => {
     }
 
     // Change visibility
+    helpText.hidden = true;
     allModsCheckbox.hidden = true;
     allModsCheckboxText.hidden = true;
     caseUploadButton.hidden = true;

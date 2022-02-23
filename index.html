@@ -48,39 +48,46 @@
 
 <body>
 
-    <h2 class="text" style="margin-bottom: 15px"><a class="inline-link" href="https://zeppelin.gg/"
-            title="A link to Zeppelin's website.">Zeppelin</a> Case
-        Stats - Made by <a class="inline-link" href="https://twitter.com/mozzyfx"
-            title="A link to Mozzy's Twitter.">Mozzy</a> <a class="inline-link" style="text-decoration: none;"
-            href="https://ko-fi.com/mozzy" target="_blank" title="A link to Ko-Fi.">☕</a>
-    </h2>
+    <h1 class="text" style="margin-bottom: 15px">
+        <a class="inline-link" href="https://zeppelin.gg/" target="_blank"
+            title="A link to Zeppelin's website.">Zeppelin</a> Case Stats
+        (<a class="inline-link" href="/help" title="See help and info.">Help & Info</a>)
+        - Made by
+        <a class="inline-link" href="https://twitter.com/mozzyfx" target="_blank"
+            title="A link to Mozzy's Twitter.">Mozzy</a>
+        <a class="inline-link" style="text-decoration: none;" href="https://ko-fi.com/mozzy" target="_blank"
+            title="A link to Ko-Fi.">&#9749;</a>
+    </h1>
 
     <hr class="hr">
 
     <div class="upper-options">
+        <label id="helpText" class="text">Read the <a class="inline-link" href="/help">help section</a> for information.
+            <br><br>
+        </label>
         <input id="allModsCheckbox" type="checkbox" onchange="checkBoxChecked()">
-        <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text">Look
-            for all mods
-            found (Experimental - Populates ID and name automatically by reading the data)</label>
+        <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text"> Automatically
+            select mods. Shows every mod with at least 1 case.</label>
         <input hidden id="modsUpload" type="file">
         <input hidden id="caseUpload" type="file">
         <div id="modsUploadButton" class="text">
+            OR
+            <br>
             <button class="button buttonBlue" type="file"
                 title="Opens the file browser for you to select a file that has a valid JSON array of data."
-                onclick="clickOpenFileButton1()">1. Upload Mod List</button>
-            - Upload a JSON array that looks like: <code style="font-size: 1.2em">[{ "id": "MOD_ID1", "name": "MOD_NAME1" }, { "id": "MOD_ID2", "name":
-                    "MOD_NAME2" }]</code>. This will only pull data on those mods. Names can be whatever.
+                onclick="clickOpenFileButton1()">Upload Mod List</button>
+            – A JSON array that looks like: <code style="font-size: 1.2em">[{ "id": "MOD_ID1", "name": "MOD_NAME1" }, { "id": "MOD_ID2", "name":
+                    "MOD_NAME2" }]</code>. This will only pull data on those mods.
         </div>
         <div hidden id="caseUploadButton" class="text">
             <button class="button buttonBlue" type="file"
                 title="Opens the file browser for you to select a Zeppelin case export file. Anything with matching structure will also work."
-                onclick="clickOpenFileButton2()">2. Upload
-                Zeppelin Cases
+                onclick="clickOpenFileButton2()">Upload
+                Zeppelin Export
             </button>
-            - Export your case data at <code
-                style="font-size: 1.2em">https://zeppelin.gg/dashboard/guilds/{guild_id}/import-export</code>, then
-            upload
-            that file.
+            – Export your case data at
+            <code><a class="inline-link" style="text-decoration: underline;"
+                href="https://zeppelin.gg/dashboard">https://zeppelin.gg/dashboard</a>/guilds/{guild_id}/import-export</code>
         </div>
         <button hidden class="button buttonRed" style="margin-top: 1em;" id="resetButton"
             title="Refreshes the window.">Reset</button>
@@ -91,15 +98,15 @@
     </div>
     <span class="text">Download as:</span>
     <button class="button buttonBlue" id="downloadButtonJSON"
-        title="Downloads the current table data as JSON.">json</button>
+        title="Downloads the current table data as JSON.">JSON</button>
     <button class="button buttonBlue" id="downloadButtonCSV"
-        title="Downloads the current table data as CSV.">csv</button>
+        title="Downloads the current table data as CSV.">CSV</button>
     <button class="button buttonBlue" id="downloadButtonHTML"
-        title="Downloads the current table data as HTML.">html</button>
+        title="Downloads the current table data as HTML.">HTML</button>
     <button class="button buttonBlue" id="downloadButtonXLSX"
-        title="Downloads the current table data as XLSX (Excel/Google Sheets compatible).">xlsx</button>
+        title="Downloads the current table data as XLSX (Excel/Google Sheets compatible).">XLSX</button>
     <button class="button buttonBlue" id="downloadButtonPDF"
-        title="Downloads the current table data as PDF (with some styling).">pdf</button>
+        title="Downloads the current table data as PDF (with some styling).">PDF</button>
 
     <script>
 

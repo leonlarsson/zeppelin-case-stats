@@ -3,6 +3,27 @@ body {
   padding: 1em 3em;
 }
 
+code {
+  font-size: 1.3em !important;
+}
+
+.code {
+  background-color: #282c34;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.code-block {
+  background-color: #282c34;
+  font-family: monospace;
+  color: #fff;
+  padding: 10px 5px;
+  border-radius: 5px;
+  display: block;
+  white-space: pre-wrap;
+}
+
 .text {
   font-family: "Roboto", sans-serif;
 }

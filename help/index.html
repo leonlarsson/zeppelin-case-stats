@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Primary Meta Tags -->
+    <title>Zeppelin Case Stats - Help</title>
+    <meta name="title" content="Zeppelin Case Stats - Help">
+    <meta name="description" content="See your Zeppelin bot cases broken down per moderator.">
+    <meta name="theme-color" content="#5865F2">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zeppelin-stats.leonlarsson.com/help">
+    <meta property="og:title" content="Zeppelin Case Stats - Help">
+    <meta property="og:description" content="See your Zeppelin bot cases broken down per moderator.">
+    <meta property="og:image" content="https://zeppelin-stats.leonlarsson.com/assets/images/embed.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zeppelin-stats.leonlarsson.com/help">
+    <meta property="twitter:title" content="Zeppelin Case Stats - Help">
+    <meta property="twitter:description" content="See your Zeppelin bot cases broken down per moderator.">
+    <meta property="twitter:image" content="https://zeppelin-stats.leonlarsson.com/assets/images/embed.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- <link rel="icon" href="https://zeppelin-stats.leonlarsson.com/assets/images/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://zeppelin-stats.leonlarsson.com/assets/images/icon.ico" type="image/x-icon"> -->
+
+    <link rel="stylesheet" href="../assets/styles/main.css">
+</head>
+
+<body>
+
+    <h1 class="text" style="margin-bottom: 15px">
+        (<a class="inline-link" href="/" title="A link to tool.">Zeppelin Case Stats</a>)
+        Help & Info
+        - Made by
+        <a class="inline-link" href="https://twitter.com/mozzyfx" target="_blank"
+            title="A link to Mozzy's Twitter.">Mozzy</a>
+        <a class="inline-link" style="text-decoration: none;" href="https://ko-fi.com/mozzy" target="_blank"
+            title="A link to Ko-Fi.">&#9749;</a>
+    </h1>
+
+    <hr class="hr">
+    <br>
+
+    <div class="body text">
+        <a class="inline-link" href="/">Zeppelin Case Stats</a> is a tool that allows you to upload your Zeppelin case
+        export file and break down each case
+        type per moderator.
+
+        <br><br>
+        <h2>How to use:</h2>
+        <span style="text-decoration: underline;">1. First, you can:</span>
+        <br>
+        – a) select the checkbox to automatically find all moderators in your export (finds each unique moderator with
+        at least 1 case)
+        <br>
+        – b) upload a file where you specify which moderators you want to view (info on file structure <a
+            class="inline-link" href="#modListInfo">below</a>)
+
+        <br><br>
+
+        <span style="text-decoration: underline;">2: Upload your Zeppelin case export file:</span>
+        <br>
+        This can be downloaded from
+        <code><a class="inline-link" style="text-decoration: underline;" href="https://zeppelin.gg/dashboard">https://zeppelin.gg/dashboard</a>/guilds/{guild_id}/import-export</code>
+        <br>
+        This file consists of <code>{ cases: [...] }</code> where <code>cases</code> is the array of cases.
+        <br>
+        There is currently no case age filter. Do use a range of cases, you can remove cases from the
+        <code>cases</code> array in the export file.
+
+        <br><br>
+
+        <span style="text-decoration: underline;">3: If nothing broke, you can now view the data in the table:</span>
+        <br>
+        You can filter, sort, compare case numbers, and you can download the table data in multiple different formats.
+
+        <br><br>
+        <h2 id="modListInfo">File to specify moderators:</h2>
+
+        An example file looks like this:
+        <br>
+        <pre class="code-block">
+[
+    { "id": "MOD_ID_HERE", "name": "MOD_NAME_HERE" },
+    { "id": "123123123123123123", "name": "Mod name 1" },
+    { "id": "99182302885588992", "name": "Mozzy" }
+]
+</pre>
+        This must be a VALID JSON array of objects. Each object must have the properties <code>"id"</code> and
+        <code>"name"</code>. Must also be without any trailing commas.
+        <br>
+        The <code>"id"</code> property is the Discord user ID of the moderator you want to view.
+        <br>
+        The <code>"name"</code> property is the name you want to assign to this moderator. The name can be whatever.
+        <br>
+        ⚠ Both values need to be strings. ⚠
+
+        <br><br>
+
+        <h2>Comments and credits:</h2>
+
+        This tool/website was created by <a class="inline-link" href="https://twitter.com/mozzyfx" target="_blank"
+            title="A link to Mozzy's Twitter.">Mozzy</a>. If you find this useful and want to donate, you can do that <a
+            class="inline-link" href="https://ko-fi.com/mozzy" target="_blank" title="A link to Ko-Fi.">here</a>
+        &#9749;</span>.
+
+        <br>
+
+        The <a class="inline-link" href="https://github.com/ZeppelinBot/Zeppelin">Zeppelin</a> Discord bot was created
+        by <a class="inline-link" href="https://github.com/Dragory">Dragory</a>.
+
+        <br>
+
+        The table used is <a class="inline-link" href="https://github.com/olifolkerd/tabulator">Tabulator</a>.
+
+        <h3>Data examples:</h3>
+
+        This website was made specifically for Zeppelin case exports, but any export structure could technically be
+        used if structured to match Zeppelin's structure.
+        <br>
+        Zeppelin case structure:
+        <br>
+        <pre class="code-block">
+{
+    "case_number": 31332,
+    "user_id": "123123789546471544",
+    "user_name": "baduser#9270",
+    "mod_id": "99182302885588992",
+    "mod_name": "Mozzy#9999",
+    "type": 4,
+    "created_at": "2021-10-17 06:01:47",
+    "is_hidden": false,
+    "pp_id": null,
+    "pp_name": null,
+    "notes": [
+      {
+        "mod_id": "99182302885588992",
+        "mod_name": "Mozzy#9999",
+        "body": "__[User notified with a direct message]__ Do not discuss political topics, per rule 5",
+        "created_at": "2021-10-17 06:01:47"
+      },
+      {
+        "mod_id": "99182302885588992",
+        "mod_name": "Mozzy#9999",
+        "body": "something",
+        "created_at": "2021-10-17 06:02:10"
+      }
+    ]
+}
+</pre>
+
+        <br>
+        This website uses the <code>"type"</code> property in each case to calculate the amounts of specific case types.
+        <br>
+        The Zeppelin case types are as follows:
+
+        <pre class="code-block">
+BAN: 1,
+UNBAN: 2,
+NOTE: 3,
+WARNING: 4,
+KICK: 5,
+MUTE: 6,
+UNMUTE: 7,
+CASE_DELETED: 8,
+SOFT_BAN: 9
+</pre>
+
+    </div>
+
+</body>
+
+</html>
