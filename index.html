@@ -43,42 +43,10 @@
     <!-- https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js -->
 
     <script type="module" src="./assets/js/index.js"></script>
+    <link rel="stylesheet" href="./assets/styles/main.css">
 </head>
 
 <body>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 1em 3em;
-        }
-
-        .text {
-            font-family: "Roboto", sans-serif;
-        }
-
-        .button {
-            color: white;
-            border-radius: 3px;
-            width: auto;
-            height: 30px;
-            font-family: "Roboto", sans-serif;
-            border: 0px;
-        }
-
-        .buttonBlue {
-            background-color: #5865f2;
-        }
-
-        .buttonBlue:hover {
-            background-color: #4752c4;
-            cursor: pointer;
-        }
-
-        .buttonBlue:active {
-            background-color: #3c45a5;
-        }
-    </style>
 
     <h2 class="text"><a style="text-decoration: underline; color: #000" href="https://zeppelin.gg/">Zeppelin</a> Case
         Stats - Made by <a style="text-decoration: underline; color: #000" href="https://twitter.com/mozzyfx">Mozzy</a>
@@ -105,6 +73,7 @@
             upload
             that file.
         </div>
+        <button hidden class="button buttonRed" style="margin-top: 1em;" id="resetButton">Reset</button>
     </div>
 
     <div class="container">

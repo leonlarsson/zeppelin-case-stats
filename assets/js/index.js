@@ -8,6 +8,7 @@ const totalCasesButton = document.getElementById("totalCasesButton");
 const casesSinceLaunchButton = document.getElementById("casesSinceLaunchButton");
 const totalCasesAdminsButton = document.getElementById("totalCasesAdminsButton");
 const casesSinceLaunchAdminsButton = document.getElementById("casesSinceLaunchAdminsButton");
+const resetButton = document.getElementById("resetButton");
 const table = document.getElementById("caseTable");
 const downloadButtonJSON = document.getElementById("downloadButtonJSON");
 const downloadButtonCSV = document.getElementById("downloadButtonCSV");
@@ -110,6 +111,7 @@ modsUpload.addEventListener("change", event => {
             allModsCheckboxText.hidden = true;
             caseUploadButton.hidden = false;
             modsUploadButton.hidden = true;
+            resetButton.hidden = false;
         }
     }
 });
@@ -154,8 +156,14 @@ caseUpload.addEventListener("change", event => {
     allModsCheckbox.hidden = true;
     allModsCheckboxText.hidden = true;
     caseUploadButton.hidden = true;
+    resetButton.hidden = false;
 });
 
+
+// Reload the window (a lot of hassle trying to reset everything)
+resetButton.addEventListener("click", () => {
+    window.location.reload();
+});
 
 // Download table data as JSON
 downloadButtonJSON.addEventListener("click", () => {
