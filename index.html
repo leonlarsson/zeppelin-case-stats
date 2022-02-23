@@ -5,27 +5,27 @@
     <!-- Primary Meta Tags -->
     <title>Zeppelin Case Stats</title>
     <meta name="title" content="Zeppelin Case Stats">
-    <meta name="description" content="A website used to see how your moderators perform individually.">
+    <meta name="description" content="See your Zeppelin bot cases broken down per moderator.">
     <meta name="theme-color" content="#5865F2">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zeppelin-stats.leonlarsson.com">
     <meta property="og:title" content="Zeppelin Case Stats">
-    <meta property="og:description" content="A website used to see how your moderators perform individually.">
-    <!-- <meta property="og:image" content="https://logsorter.net/assets/images/embed.png"> -->
+    <meta property="og:description" content="See your Zeppelin bot cases broken down per moderator.">
+    <meta property="og:image" content="https://zeppelin-stats.leonlarsson.com/assets/images/embed.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://zeppelin-stats.leonlarsson.com">
     <meta property="twitter:title" content="Zeppelin Case Stats">
-    <meta property="twitter:description" content="A website used to see how your moderators perform individually.">
-    <!-- <meta property="twitter:image" content="https://logsorter.net/assets/images/embed.png"> -->
+    <meta property="twitter:description" content="See your Zeppelin bot cases broken down per moderator.">
+    <meta property="twitter:image" content="https://zeppelin-stats.leonlarsson.com/assets/images/embed.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- <link rel="icon" href="https://logsorter.net/assets/images/icon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="https://logsorter.net/assets/images/icon.ico" type="image/x-icon"> -->
+    <!-- <link rel="icon" href="https://zeppelin-stats.leonlarsson.com/assets/images/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://zeppelin-stats.leonlarsson.com/assets/images/icon.ico" type="image/x-icon"> -->
 
     <link href="./assets/styles/tabulator_semantic.css" rel="stylesheet">
     <!-- https://github.com/olifolkerd/tabulator/blob/master/dist/css/tabulator_semanticui.min.css -->
@@ -50,7 +50,7 @@
     <style>
         body {
             margin: 0;
-            padding: 3em;
+            padding: 1em 3em;
         }
 
         .text {
@@ -80,6 +80,10 @@
         }
     </style>
 
+    <h2 class="text"><a style="text-decoration: underline; color: #000" href="https://zeppelin.gg/">Zeppelin</a> Case
+        Stats - Made by <a style="text-decoration: underline; color: #000" href="https://twitter.com/mozzyfx">Mozzy</a>
+    </h2>
+
     <div class="upper-options">
         <input id="allModsCheckbox" type="checkbox" onchange="checkBoxChecked()">
         <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text">Look for all mods
@@ -99,8 +103,7 @@
             - Export your case data at <code
                 style="font-size: 1.2em">https://zeppelin.gg/dashboard/guilds/{guild_id}/import-export</code>, then
             upload
-            that file
-            unedited.
+            that file.
         </div>
     </div>
 
@@ -108,11 +111,11 @@
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
     </div>
     <span class="text">Download as:</span>
-    <button class="button buttonBlue" id="downloadButtonJSON">.json</button>
-    <button class="button buttonBlue" id="downloadButtonCSV">.csv</button>
-    <button class="button buttonBlue" id="downloadButtonHTML">.html</button>
-    <button class="button buttonBlue" id="downloadButtonXLSX">.xlsx</button>
-    <button class="button buttonBlue" id="downloadButtonPDF">.pdf</button>
+    <button class="button buttonBlue" id="downloadButtonJSON">json</button>
+    <button class="button buttonBlue" id="downloadButtonCSV">csv</button>
+    <button class="button buttonBlue" id="downloadButtonHTML">html</button>
+    <button class="button buttonBlue" id="downloadButtonXLSX">xlsx</button>
+    <button class="button buttonBlue" id="downloadButtonPDF">pdf</button>
 
     <script>
 
