@@ -96,35 +96,51 @@ const coolTable = new Tabulator(table, {
 // Receive the mod list file
 let modsList;
 modsUpload.addEventListener("change", event => {
+
+    // Create new FileReader
     const reader = new FileReader();
-    reader.readAsText(event.target.files[0]);
-
     reader.onload = event => {
-        const modArray = JSON.parse(event.target.result);
-        modsList = modArray;
 
-        // If data received is not an array or the first index does not comply, return an alert
-        if (!Array.isArray(modsList) || !modsList[0].id || !modsList[0].name) {
-            return alert('This file needs to be an array with the correct JSON structure. Example:\n\n[\n  { "id": "MOD_ID1", "name": "MOD_NAME1" },\n  { "id": "MOD_ID2", "name": "MOD_NAME2" }\n]');
-        } else {
-            // Change visibility
-            allModsCheckbox.hidden = true;
-            allModsCheckboxText.hidden = true;
-            caseUploadButton.hidden = false;
-            modsUploadButton.hidden = true;
-            resetButton.hidden = false;
+        // If file cannot be parsed into JSON, return and alert.
+        try {
+            modsList = JSON.parse(event.target.result);
+        } catch (error) {
+            return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
         }
+
+        // If data received is not an array or the first index does not comply, return and notify
+        if (!Array.isArray(modsList) || !modsList[0].id || !modsList[0].name)
+            return alert('This file needs to be an array with the correct JSON structure. Example:\n\n[\n  { "id": "MOD_ID1", "name": "MOD_NAME1" },\n  { "id": "MOD_ID2", "name": "MOD_NAME2" }\n]');
+
+        // Change visibility
+        allModsCheckbox.hidden = true;
+        allModsCheckboxText.hidden = true;
+        caseUploadButton.hidden = false;
+        modsUploadButton.hidden = true;
+        resetButton.hidden = false;
+
     }
+
+    // Read file
+    reader.readAsText(event.target.files[0]);
 });
 
 // Receive the case export file
 caseUpload.addEventListener("change", event => {
 
+    // Create new FileReader
     const reader = new FileReader();
-    reader.readAsText(event.target.files[0]);
     reader.onload = event => {
 
-        const caseData = JSON.parse(event.target.result);
+        let caseData;
+        try {
+            caseData = JSON.parse(event.target.result);
+        } catch (error) {
+            return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
+        }
+
+        // If received data does not have an array called "cases", return and notify
+        if (!Array.isArray(caseData.cases)) return alert('Could not find array "cases".\nIs this a Zeppelin export file?');
 
         // Create a set and add each mod_id (where mod_id is not "0", where it exists, and where it doesn't equal user_id (automod))
         const set = new Set();
@@ -142,23 +158,26 @@ caseUpload.addEventListener("change", event => {
                 WARNING: `${cases.filter(inf => inf.type === CASE_TYPES.WARNING).length} (${(cases.filter(inf => inf.type === CASE_TYPES.WARNING).length / cases.length * 100).toFixed(1)}%)`,
                 KICK: `${cases.filter(inf => inf.type === CASE_TYPES.KICK).length} (${(cases.filter(inf => inf.type === CASE_TYPES.KICK).length / cases.length * 100).toFixed(1)}%)`,
                 MUTE: `${cases.filter(inf => inf.type === CASE_TYPES.MUTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.MUTE).length / cases.length * 100).toFixed(1)}%)`,
-                UNMUTE: `${cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length / cases.length * 100).toFixed(1)}%)`,
-            }
+                UNMUTE: `${cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length / cases.length * 100).toFixed(1)}%)`
+            };
 
             // Push the data to the array
             dataArray.push({ id: (allModsCheckbox.checked ? mod : mod.id), name: (allModsCheckbox.checked ? modName : mod.name), cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
         });
 
+        // Change visibility
+        helpText.hidden = true;
+        allModsCheckbox.hidden = true;
+        allModsCheckboxText.hidden = true;
+        caseUploadButton.hidden = true;
+        resetButton.hidden = false;
+
         // Set the table data
         coolTable.setData(dataArray);
     }
 
-    // Change visibility
-    helpText.hidden = true;
-    allModsCheckbox.hidden = true;
-    allModsCheckboxText.hidden = true;
-    caseUploadButton.hidden = true;
-    resetButton.hidden = false;
+    // Read file
+    reader.readAsText(event.target.files[0]);
 });
 
 
