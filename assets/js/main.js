@@ -1,4 +1,4 @@
-import { ZeppelinCaseTypes } from "./constants.js";
+import { ZeppelinCaseTypes, ModFileTypes } from "./constants.js";
 
 const helpText = document.getElementById("helpText");
 const allModsCheckbox = document.getElementById("allModsCheckbox");
@@ -96,9 +96,9 @@ modsUpload.addEventListener("change", event => {
 
         // Since the file is valid JSON, determine if the file is object-based or just an array of strings (IDs)
         if (Array.isArray(modsList) && modsList.every(x => x.id && typeof x.id === "string" && x.name && typeof x.name === "string")) {
-            typeOfModFile = 1;
+            typeOfModFile = ModFileTypes.TYPE_OBJECT;
         } else if (Array.isArray(modsList) && modsList.every(x => typeof x === "string")) {
-            typeOfModFile = 2;
+            typeOfModFile = ModFileTypes.TYPE_ID_ARRAY;
         } else {
             return alert("File is valid JSON, but the format is not supported.\nTo see all supported formats, see the help page.");
         }
@@ -141,18 +141,20 @@ caseUpload.addEventListener("change", event => {
 
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
         const dataArray = [];
+        const noCasesFoundForId = [];
         (allModsCheckbox.checked ? [...set] : modsList).forEach(mod => {
 
-            // TODO: Handle when the mod ID was not found in any cases
-
             // Determine the mod ID to use for this mod. mod variable is either a string or an object at this point
-            const modId = (allModsCheckbox.checked || typeOfModFile === 2) ? mod : mod.id;
-
-            // Determine the mod name. If mode auto or if modsList is an array of strings, find the name through the cases, otherwise use the object mod.name
-            const modName = (allModsCheckbox.checked || typeOfModFile === 2) ? caseData.cases.find(inf => inf.mod_id === modId).mod_name : mod.name;
+            const modId = (allModsCheckbox.checked || typeOfModFile === ModFileTypes.TYPE_ID_ARRAY) ? mod : mod.id;
 
             // Get all cases by mod
             const cases = caseData.cases.filter(inf => inf.mod_id === modId);
+
+            // If this mod has no cases, return and add to array of failed IDs
+            if (!cases.length) return noCasesFoundForId.push(modId);
+
+            // Determine the mod name. If mode auto or if modsList is an array of strings, find the name through the cases, otherwise use the object mod.name
+            const modName = (allModsCheckbox.checked || typeOfModFile === ModFileTypes.TYPE_ID_ARRAY) ? caseData.cases.find(inf => inf.mod_id === modId).mod_name : mod.name;
 
             const caseCounts = {
                 BAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length / cases.length * 100).toFixed(1)}%)`,
@@ -167,6 +169,9 @@ caseUpload.addEventListener("change", event => {
             // Push the data to the array
             dataArray.push({ id: modId, name: modName, cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
         });
+
+        // Alert if some IDs were not found in cases
+        if (noCasesFoundForId.length) alert(`Found no cases for ${noCasesFoundForId.length} ${noCasesFoundForId.length === 1 ? "ID" : "IDs"}:\n\n${noCasesFoundForId.join(", ")}`);
 
         // Change visibility
         helpText.hidden = true;

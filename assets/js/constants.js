@@ -9,3 +9,8 @@ export const ZeppelinCaseTypes = {
     CASE_DELETED: 8,
     SOFT_BAN: 9
 };
+
+export const ModFileTypes = {
+    TYPE_ID_ARRAY: "idArray",
+    TYPE_OBJECT: "object"
+};
