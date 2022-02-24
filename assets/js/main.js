@@ -97,7 +97,7 @@ modsUpload.addEventListener("change", event => {
         // Since the file is valid JSON, determine if the file is object-based or just an array of strings (IDs)
         if (Array.isArray(modsList) && modsList.every(x => x.id && typeof x.id === "string" && x.name && typeof x.name === "string")) {
             typeOfModFile = ModFileTypes.TYPE_OBJECT;
-        } else if (Array.isArray(modsList) && modsList.every(x => typeof x === "string")) {
+        } else if (Array.isArray(modsList) && modsList.every(x => x && typeof x === "string")) {
             typeOfModFile = ModFileTypes.TYPE_ID_ARRAY;
         } else {
             return alert("File is valid JSON, but the format is not supported.\nTo see all supported formats, see the help page.");
