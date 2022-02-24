@@ -66,7 +66,7 @@
         – a) select the checkbox to automatically find all moderators in your export (finds each unique moderator with
         at least 1 case)
         <br>
-        – b) upload a file where you specify which moderators you want to view (info on file structure <a
+        – b) upload a file where you specify which moderators you want to view (info on supported formats <a
             class="inline-link" href="#modListInfo">below</a>)
 
         <br><br>
@@ -85,13 +85,20 @@
 
         <span style="text-decoration: underline;">3: If nothing broke, you can now view the data in the table:</span>
         <br>
-        You can filter, sort, compare case numbers, and you can download the table data in multiple different formats.
+        You can now filter, sort, and compare case numbers, and you can download the table data in multiple different
+        formats.
 
         <br><br>
-        <h2 id="modListInfo">File to specify moderators:</h2>
+        <h2 id="modListInfo">Files to specify moderators:</h2>
 
-        An example file looks like this:
+        There are currently two supported formats: An array of IDs, or an array of objects.
         <br>
+        <h3>1: First format, an array of strings (Discord user IDs):</h3>
+        <pre class="code-block">["MOD_ID_HERE", "123123123123123123", "99182302885588992"]</pre>
+        This is a simple array with just the Discord IDs you want to view. The tool will try to get each mod's name from
+        the exported case data automatically.
+        <br><br>
+        <h3>2: Second format, an array of objects that hold two properties:</h3>
         <pre class="code-block">
 [
     { "id": "MOD_ID_HERE", "name": "MOD_NAME_HERE" },
@@ -99,8 +106,10 @@
     { "id": "99182302885588992", "name": "Mozzy" }
 ]
 </pre>
-        This must be a VALID JSON array of objects. Each object must have the properties <code>"id"</code> and
-        <code>"name"</code>. Must also be without any trailing commas.
+        You can use this format if you want to specify the mod's name manually.
+        <br>
+        Each object must have the properties <code>"id"</code> and
+        <code>"name"</code>.
         <br>
         The <code>"id"</code> property is the Discord user ID of the moderator you want to view.
         <br>

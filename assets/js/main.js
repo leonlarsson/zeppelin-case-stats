@@ -5,10 +5,6 @@ const modsUploadButton = document.getElementById("modsUploadButton");
 const caseUploadButton = document.getElementById("caseUploadButton");
 const modsUpload = document.getElementById("modsUpload");
 const caseUpload = document.getElementById("caseUpload");
-const totalCasesButton = document.getElementById("totalCasesButton");
-const casesSinceLaunchButton = document.getElementById("casesSinceLaunchButton");
-const totalCasesAdminsButton = document.getElementById("totalCasesAdminsButton");
-const casesSinceLaunchAdminsButton = document.getElementById("casesSinceLaunchAdminsButton");
 const resetButton = document.getElementById("resetButton");
 const table = document.getElementById("caseTable");
 const downloadButtonJSON = document.getElementById("downloadButtonJSON");
@@ -95,6 +91,7 @@ const coolTable = new Tabulator(table, {
 
 // Receive the mod list file
 let modsList;
+let typeOfModFile;
 modsUpload.addEventListener("change", event => {
 
     // Create new FileReader
@@ -108,9 +105,14 @@ modsUpload.addEventListener("change", event => {
             return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
         }
 
-        // If data received is not an array or the first index does not comply, return and notify
-        if (!Array.isArray(modsList) || !modsList[0].id || !modsList[0].name)
-            return alert('This file needs to be an array with the correct JSON structure. Example:\n\n[\n  { "id": "MOD_ID1", "name": "MOD_NAME1" },\n  { "id": "MOD_ID2", "name": "MOD_NAME2" }\n]');
+        // Since the file is valid JSON, determine if the file is object-based or just an array of strings (IDs)
+        if (Array.isArray(modsList) && modsList.every(x => typeof x.id === "string" && typeof x.name === "string")) {
+            typeOfModFile = 1;
+        } else if (Array.isArray(modsList) && modsList.every(x => typeof x === "string")) {
+            typeOfModFile = 2;
+        } else {
+            return alert("File is valid JSON, but the format is not supported.\nTo see all supported formats, see the help page.");
+        }
 
         // Change visibility
         allModsCheckbox.hidden = true;
@@ -118,7 +120,6 @@ modsUpload.addEventListener("change", event => {
         caseUploadButton.hidden = false;
         modsUploadButton.hidden = true;
         resetButton.hidden = false;
-
     }
 
     // Read file
@@ -139,8 +140,9 @@ caseUpload.addEventListener("change", event => {
             return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
         }
 
-        // If received data does not have an array called "cases", return and notify
+        // If received data does not have an array called "cases" or if there are no cases, return and notify
         if (!Array.isArray(caseData.cases)) return alert('Could not find array "cases".\nIs this a Zeppelin export file?');
+        if (!caseData.cases.length) return alert("Found an array of cases, but there are no cases there.");
 
         // Create a set and add each mod_id (where mod_id is not "0", where it exists, and where it doesn't equal user_id (automod))
         const set = new Set();
@@ -149,8 +151,16 @@ caseUpload.addEventListener("change", event => {
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
         const dataArray = [];
         (allModsCheckbox.checked ? [...set] : modsList).forEach(mod => {
-            const cases = caseData.cases.filter(inf => (allModsCheckbox.checked ? mod : mod.id) === inf.mod_id);
-            const modName = cases.find(inf => (allModsCheckbox.checked ? mod : mod.id) === inf.mod_id).mod_name;
+
+            // Determine the mod ID to use for this mod. mod variable is either a string or an object at this point
+            const modId = (allModsCheckbox.checked || typeOfModFile === 2) ? mod : mod.id;
+
+            // Determine the mod name. If mode auto or if modsList is an array of strings, find the name through the cases, otherwise use the object mod.name
+            const modName = (allModsCheckbox.checked || typeOfModFile === 2) ? caseData.cases.find(inf => inf.mod_id === modId).mod_name : mod.name;
+
+            // Get all cases by mod
+            const cases = caseData.cases.filter(inf => inf.mod_id === modId);
+
             const caseCounts = {
                 BAN: `${cases.filter(inf => inf.type === CASE_TYPES.BAN).length} (${(cases.filter(inf => inf.type === CASE_TYPES.BAN).length / cases.length * 100).toFixed(1)}%)`,
                 UNBAN: `${cases.filter(inf => inf.type === CASE_TYPES.UNBAN).length} (${(cases.filter(inf => inf.type === CASE_TYPES.UNBAN).length / cases.length * 100).toFixed(1)}%)`,
@@ -162,7 +172,7 @@ caseUpload.addEventListener("change", event => {
             };
 
             // Push the data to the array
-            dataArray.push({ id: (allModsCheckbox.checked ? mod : mod.id), name: (allModsCheckbox.checked ? modName : mod.name), cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
+            dataArray.push({ id: modId, name: modName, cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
         });
 
         // Change visibility
