@@ -1,3 +1,5 @@
+import { ZeppelinCaseTypes } from "./constants.js";
+
 const helpText = document.getElementById("helpText");
 const allModsCheckbox = document.getElementById("allModsCheckbox");
 const allModsCheckboxText = document.getElementById("allModsCheckboxText");
@@ -12,19 +14,6 @@ const downloadButtonCSV = document.getElementById("downloadButtonCSV");
 const downloadButtonHTML = document.getElementById("downloadButtonHTML");
 const downloadButtonXLSX = document.getElementById("downloadButtonXLSX");
 const downloadButtonPDF = document.getElementById("downloadButtonPDF");
-
-// Set Zeppelin case types
-const CASE_TYPES = {
-    BAN: 1,
-    UNBAN: 2,
-    NOTE: 3,
-    WARNING: 4,
-    KICK: 5,
-    MUTE: 6,
-    UNMUTE: 7,
-    CASE_DELETED: 8,
-    SOFT_BAN: 9
-};
 
 const calcSumNumbers = values => {
     let sum = 0;
@@ -162,13 +151,13 @@ caseUpload.addEventListener("change", event => {
             const cases = caseData.cases.filter(inf => inf.mod_id === modId);
 
             const caseCounts = {
-                BAN: `${cases.filter(inf => inf.type === CASE_TYPES.BAN).length} (${(cases.filter(inf => inf.type === CASE_TYPES.BAN).length / cases.length * 100).toFixed(1)}%)`,
-                UNBAN: `${cases.filter(inf => inf.type === CASE_TYPES.UNBAN).length} (${(cases.filter(inf => inf.type === CASE_TYPES.UNBAN).length / cases.length * 100).toFixed(1)}%)`,
-                NOTE: `${cases.filter(inf => inf.type === CASE_TYPES.NOTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.NOTE).length / cases.length * 100).toFixed(1)}%)`,
-                WARNING: `${cases.filter(inf => inf.type === CASE_TYPES.WARNING).length} (${(cases.filter(inf => inf.type === CASE_TYPES.WARNING).length / cases.length * 100).toFixed(1)}%)`,
-                KICK: `${cases.filter(inf => inf.type === CASE_TYPES.KICK).length} (${(cases.filter(inf => inf.type === CASE_TYPES.KICK).length / cases.length * 100).toFixed(1)}%)`,
-                MUTE: `${cases.filter(inf => inf.type === CASE_TYPES.MUTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.MUTE).length / cases.length * 100).toFixed(1)}%)`,
-                UNMUTE: `${cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length} (${(cases.filter(inf => inf.type === CASE_TYPES.UNMUTE).length / cases.length * 100).toFixed(1)}%)`
+                BAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length / cases.length * 100).toFixed(1)}%)`,
+                UNBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length / cases.length * 100).toFixed(1)}%)`,
+                NOTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length / cases.length * 100).toFixed(1)}%)`,
+                WARNING: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length / cases.length * 100).toFixed(1)}%)`,
+                KICK: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length / cases.length * 100).toFixed(1)}%)`,
+                MUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length / cases.length * 100).toFixed(1)}%)`,
+                UNMUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length / cases.length * 100).toFixed(1)}%)`
             };
 
             // Push the data to the array
