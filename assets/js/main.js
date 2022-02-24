@@ -95,7 +95,7 @@ modsUpload.addEventListener("change", event => {
         }
 
         // Since the file is valid JSON, determine if the file is object-based or just an array of strings (IDs)
-        if (Array.isArray(modsList) && modsList.every(x => typeof x.id === "string" && typeof x.name === "string")) {
+        if (Array.isArray(modsList) && modsList.every(x => x.id && typeof x.id === "string" && x.name && typeof x.name === "string")) {
             typeOfModFile = 1;
         } else if (Array.isArray(modsList) && modsList.every(x => typeof x === "string")) {
             typeOfModFile = 2;
@@ -140,6 +140,8 @@ caseUpload.addEventListener("change", event => {
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
         const dataArray = [];
         (allModsCheckbox.checked ? [...set] : modsList).forEach(mod => {
+
+            // TODO: Handle when the mod ID was not found in any cases
 
             // Determine the mod ID to use for this mod. mod variable is either a string or an object at this point
             const modId = (allModsCheckbox.checked || typeOfModFile === 2) ? mod : mod.id;
