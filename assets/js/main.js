@@ -103,6 +103,8 @@ modsUpload.addEventListener("change", event => {
             return alert("File is valid JSON, but the format is not supported.\nTo see all supported formats, see the help page.");
         }
 
+        console.log("[DEBUG]: Loaded mods list data:\n", modsList);
+
         // Change visibility
         allModsCheckbox.hidden = true;
         allModsCheckboxText.hidden = true;
