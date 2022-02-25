@@ -54,7 +54,7 @@ const coolTable = new Tabulator(table, {
             id: "EXAMPLE_MOD_ID", name: "EXAMPLE_MOD_NAME", cases: "CASES (X% OF SUM TOTAL)", caseCounts: { BAN: "BANS (X% OF MOD)", UNBAN: "UNBANS (X% OF MOD)", NOTE: "NOTES (X% OF MOD)", WARNING: "WARNINGS (X% OF MOD)", KICK: "KICKS (X% OF MOD)", MUTE: "MUTES (X% OF MOD)", UNMUTE: "UNMUTES (X% OF MOD)", SOFTBAN: "SOFTBANS (X% OF MOD)", UNKNOWN: "UNKNOWN (X% OF MOD)" }
         },
         {
-            id: "99182302885588992", name: "Mozzy#9999", cases: "6097 (100% of total)", caseCounts: { BAN: "5590 (91.7%)", UNBAN: "47 (0.8%)", NOTE: "25 (0.4%)", WARNING: "128 (2.1%)", KICK: "19 (0.3%)", MUTE: "212 (3.5%)", UNMUTE: "76 (1.2%)", SOFTBAN: "0 (0.0%)", UNKNOWN: "0 (0.0%)" }
+            id: "99182302885588992", name: "Mozzy#9999", cases: "6097 (100% of total)", caseCounts: { BAN: "5590 (91.7%)", UNBAN: "47 (0.8%)", NOTE: "25 (0.4%)", WARNING: "128 (2.1%)", KICK: "19 (0.3%)", MUTE: "212 (3.5%)", UNMUTE: "76 (1.2%)", SOFTBAN: "0 (0%)", UNKNOWN: "0 (0%)" }
         }
     ]
 });

@@ -195,19 +195,19 @@ caseUpload.addEventListener("change", event => {
             const modName = (allModsCheckbox.checked || typeOfModFile === ModFileTypes.TYPE_ID_ARRAY) ? caseData.cases.find(inf => inf.mod_id === modId).mod_name : mod.name;
 
             const caseCounts = {
-                BAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length / cases.length * 100).toFixed(1)}%)`,
-                UNBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length / cases.length * 100).toFixed(1)}%)`,
-                NOTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length / cases.length * 100).toFixed(1)}%)`,
-                WARNING: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length / cases.length * 100).toFixed(1)}%)`,
-                KICK: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length / cases.length * 100).toFixed(1)}%)`,
-                MUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length / cases.length * 100).toFixed(1)}%)`,
-                UNMUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length / cases.length * 100).toFixed(1)}%)`,
-                SOFTBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length / cases.length * 100).toFixed(1)}%)`,
-                UNKNOWN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length / cases.length * 100).toFixed(1)}%)`
+                BAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                UNBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                NOTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                WARNING: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                KICK: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                MUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                UNMUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                SOFTBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`,
+                UNKNOWN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length / cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}%)`
             };
 
             // Push the data to the array
-            dataArray.push({ id: modId, name: modName, cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
+            dataArray.push({ id: modId, name: modName, cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1).replace(/[.,]0$/, "")}% of total)`, caseCounts });
         });
 
         console.log("[DEBUG]: Loaded server data:\n", server);
