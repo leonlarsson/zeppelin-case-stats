@@ -139,13 +139,31 @@ caseUpload.addEventListener("change", event => {
         if (!caseData.cases.length) return alert("Found an array of cases, but there are no cases there.");
 
         // Create a set and add each mod_id (where mod_id is not "0", where it exists, and where it doesn't equal user_id (automod))
-        const set = new Set();
-        caseData.cases.filter(inf => inf.mod_id !== "0" && inf.mod_id && inf.mod_id !== inf.user_id).forEach(inf => set.add(inf.mod_id));
+        const uniqueMods = new Set();
+        const totalModCases = caseData.cases.filter(inf => inf.mod_id !== "0" && inf.mod_id && inf.mod_id !== inf.user_id);
+        totalModCases.forEach(inf => uniqueMods.add(inf.mod_id));
+
+        // Build some data for the server
+        const server = {
+            totalCases: caseData.cases.length,
+            totalModCases: totalModCases.length,
+            totalMods: uniqueMods.size,
+            totalCaseCounts: {
+                BAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length,
+                UNBAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length,
+                NOTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length,
+                WARNING: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length,
+                KICK: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length,
+                MUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length,
+                UNMUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length,
+                SOFT_BAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFT_BAN).length
+            }
+        };
 
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
         const dataArray = [];
         const noCasesFoundForId = [];
-        (allModsCheckbox.checked ? [...set] : modsList).forEach(mod => {
+        (allModsCheckbox.checked ? [...uniqueMods] : modsList).forEach(mod => {
 
             // Determine the mod ID to use for this mod. mod variable is either a string or an object at this point
             const modId = (allModsCheckbox.checked || typeOfModFile === ModFileTypes.TYPE_ID_ARRAY) ? mod : mod.id;
