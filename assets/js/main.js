@@ -91,6 +91,7 @@ modsUpload.addEventListener("change", event => {
         try {
             modsList = JSON.parse(event.target.result);
         } catch (error) {
+            console.error("[DEBUG]: Failed to parse mod list as JSON as it is not valid JSON.");
             return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
         }
 
@@ -100,6 +101,7 @@ modsUpload.addEventListener("change", event => {
         } else if (Array.isArray(modsList) && modsList.every(x => x && typeof x === "string")) {
             typeOfModFile = ModFileTypes.TYPE_ID_ARRAY;
         } else {
+            console.error("[DEBUG]: Uploaded mod list is valid JSON, but not in a supported format. To see all supported formats, see the help page.");
             return alert("File is valid JSON, but the format is not supported.\nTo see all supported formats, see the help page.");
         }
 
@@ -131,12 +133,21 @@ caseUpload.addEventListener("change", event => {
         try {
             caseData = JSON.parse(event.target.result);
         } catch (error) {
+            console.error("[DEBUG]: Failed to parse case export data as JSON as it is not valid JSON.");
             return alert("Could not parse JSON. Not valid JSON. \n\n" + error);
         }
 
-        // If received data does not have an array called "cases" or if there are no cases, return and notify
-        if (!Array.isArray(caseData.cases)) return alert('Could not find array "cases".\nIs this a Zeppelin export file?');
-        if (!caseData.cases.length) return alert("Found an array of cases, but there are no cases there.");
+        // If received data does not have an array called "cases", return and notify
+        if (!Array.isArray(caseData.cases)) {
+            console.error('[DEBUG]: Could not find an array of "cases". Is this a Zeppelin export file?');
+            return alert('Could not find array "cases".\nIs this a Zeppelin export file?');
+        }
+
+        // If received data has no cases, return and notify
+        if (!caseData.cases.length) {
+            console.error("[DEBUG]: Case export data has no cases.");
+            return alert("Found an array of cases, but there are no cases there.");
+        }
 
         // Create a set and add each mod_id (where mod_id is not "0", where it exists, and where it doesn't equal user_id (automod))
         const uniqueMods = new Set();
@@ -157,7 +168,8 @@ caseUpload.addEventListener("change", event => {
                 MUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length,
                 UNMUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length,
                 SOFT_BAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFT_BAN).length
-            }
+            },
+            explaination: "totalCases: total cases for server. totalModCases: total cases where a moderator took action. totalMods: number of unique mods with at least 1 case. totalCaseCounts: amount of each case type from totalCases."
         };
 
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
@@ -191,6 +203,8 @@ caseUpload.addEventListener("change", event => {
             dataArray.push({ id: modId, name: modName, cases: `${cases.length} (${(cases.length / caseData.cases.length * 100).toFixed(1)}% of total)`, caseCounts });
         });
 
+        console.log("[DEBUG]: Loaded server data:\n", server);
+
         // Alert if some IDs were not found in cases
         if (noCasesFoundForId.length) alert(`Found no cases for ${noCasesFoundForId.length} ${noCasesFoundForId.length === 1 ? "ID" : "IDs"}:\n\n${noCasesFoundForId.join(", ")}`);
 
@@ -215,6 +229,7 @@ caseUpload.addEventListener("change", event => {
 
 // Reset the page and clear the table
 resetButton.addEventListener("click", () => {
+    console.log("[DEBUG]: Resetting page and clearing table data...");
 
     // Clear some variables
     modsList = null;
@@ -235,25 +250,30 @@ resetButton.addEventListener("click", () => {
 
 // Download table data as JSON
 downloadButtonJSON.addEventListener("click", () => {
+    console.log("[DEBUG]: Downloading table as JSON...");
     coolTable.download("json", `case_stats.json`);
 });
 
 // Download table data as CSV
 downloadButtonCSV.addEventListener("click", () => {
+    console.log("[DEBUG]: Downloading table as CSV...");
     coolTable.download("csv", `case_stats.csv`);
 });
 
 // Download table data as HTML
 downloadButtonHTML.addEventListener("click", () => {
+    console.log("[DEBUG]: Downloading table as HTML...");
     coolTable.download("html", `case_stats.html`, { style: true });
 });
 
 // Download table data as XLSX
 downloadButtonXLSX.addEventListener("click", () => {
+    console.log("[DEBUG]: Downloading table as XLSX...");
     coolTable.download("xlsx", `case_stats.xlsx`, { sheetName: "Case Stats" });
 });
 
 // Download table data as PDF
 downloadButtonPDF.addEventListener("click", () => {
+    console.log("[DEBUG]: Downloading table as PDF...");
     coolTable.download("pdf", `case_stats.pdf`, { title: `Case Stats Report (${new Date().toUTCString()})` });
 });
