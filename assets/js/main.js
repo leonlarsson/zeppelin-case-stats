@@ -38,6 +38,7 @@ const coolTable = new Tabulator(table, {
     paginationCounter: "rows",
     placeholder: "Upload some data for me.",
     layout: "fitDataStretch", // This fills the width and creates a scrollbar before it gets mushy
+    layoutColumnsOnNewData: true,
     // footerElement: "<button class='button buttonBlue'>Custom Button</button>",
 
     // By default, sort by cases, descending
@@ -51,7 +52,7 @@ const coolTable = new Tabulator(table, {
             // If the cell is missing this value, it's probably a sum cell, so return
             if (!cell.getColumn()._column.definition.title) return;
             return `${cell.getRow()._row.data.name} (${cell.getRow()._row.data.id}): ${cell.getColumn()._column.definition.title} - ${cell.getValue()}`;
-        },
+        }
     },
 
     columns: [
@@ -72,7 +73,9 @@ const coolTable = new Tabulator(table, {
                 { title: "Warnings", field: "caseCounts.WARNING", sorter: "number", topCalc: calcSumNumbers },
                 { title: "Kicks", field: "caseCounts.KICK", sorter: "number", topCalc: calcSumNumbers },
                 { title: "Mutes", field: "caseCounts.MUTE", sorter: "number", topCalc: calcSumNumbers },
-                { title: "Unmutes", field: "caseCounts.UNMUTE", sorter: "number", topCalc: calcSumNumbers }
+                { title: "Unmutes", field: "caseCounts.UNMUTE", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Softbans", field: "caseCounts.SOFTBAN", sorter: "number", topCalc: calcSumNumbers },
+                { title: "Unknown", field: "caseCounts.UNKNOWN", sorter: "number", topCalc: calcSumNumbers }
             ]
         }
     ]
@@ -160,6 +163,7 @@ caseUpload.addEventListener("change", event => {
             totalModCases: totalModCases.length,
             totalMods: uniqueMods.size,
             totalCaseCounts: {
+                UNKNOWN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length,
                 BAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.BAN).length,
                 UNBAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNBAN).length,
                 NOTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.NOTE).length,
@@ -167,7 +171,8 @@ caseUpload.addEventListener("change", event => {
                 KICK: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length,
                 MUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length,
                 UNMUTE: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length,
-                SOFT_BAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFT_BAN).length
+                DELETED: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.DELETED).length,
+                SOFTBAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length
             },
             explaination: "totalCases: total cases for server. totalModCases: total cases where a moderator took action. totalMods: number of unique mods with at least 1 case. totalCaseCounts: amount of each case type from totalCases."
         };
@@ -196,7 +201,9 @@ caseUpload.addEventListener("change", event => {
                 WARNING: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.WARNING).length / cases.length * 100).toFixed(1)}%)`,
                 KICK: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.KICK).length / cases.length * 100).toFixed(1)}%)`,
                 MUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.MUTE).length / cases.length * 100).toFixed(1)}%)`,
-                UNMUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length / cases.length * 100).toFixed(1)}%)`
+                UNMUTE: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNMUTE).length / cases.length * 100).toFixed(1)}%)`,
+                SOFTBAN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length / cases.length * 100).toFixed(1)}%)`,
+                UNKNOWN: `${cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length} (${(cases.filter(inf => inf.type === ZeppelinCaseTypes.UNKNOWN).length / cases.length * 100).toFixed(1)}%)`
             };
 
             // Push the data to the array

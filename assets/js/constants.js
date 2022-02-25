@@ -1,4 +1,5 @@
 export const ZeppelinCaseTypes = {
+    UNKNOWN: 0,
     BAN: 1,
     UNBAN: 2,
     NOTE: 3,
@@ -6,8 +7,8 @@ export const ZeppelinCaseTypes = {
     KICK: 5,
     MUTE: 6,
     UNMUTE: 7,
-    CASE_DELETED: 8,
-    SOFT_BAN: 9
+    DELETED: 8,
+    SOFTBAN: 9
 };
 
 export const ModFileTypes = {
