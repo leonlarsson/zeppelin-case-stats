@@ -72,8 +72,8 @@
         <input id="allModsCheckbox" type="checkbox" onchange="checkBoxChecked()">
         <label style="user-select: none;" for="allModsCheckbox" id="allModsCheckboxText" class="text"> Automatically
             select mods. Shows every mod with at least 1 case.</label>
-        <input hidden id="modsUpload" type="file" onclick="this.value=null">
-        <input hidden id="caseUpload" type="file" onclick="this.value=null">
+        <input hidden id="modsUpload" type="file">
+        <input hidden id="caseUpload" type="file">
         <div id="modsUploadButton" class="text">
             OR
             <br>
@@ -99,9 +99,7 @@
             title="Resets the page and clears the table.">Reset</button>
     </div>
 
-    <div class="container">
-        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
-    </div>
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="caseTable"></div>
 
     <span class="text">Download as:</span>
     <button class="button buttonBlue" id="downloadButtonJSON"
@@ -133,6 +131,7 @@
         function clickOpenFileButton2() {
             document.getElementById("caseUpload").click();
         }
+
     </script>
 
 </body>

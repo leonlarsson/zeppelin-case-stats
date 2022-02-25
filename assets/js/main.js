@@ -115,6 +115,9 @@ modsUpload.addEventListener("change", event => {
 
     // Read file
     reader.readAsText(event.target.files[0]);
+
+    // Clear input value to allow for more uploads
+    modsUpload.value = null;
 });
 
 // Receive the case export file
@@ -186,6 +189,9 @@ caseUpload.addEventListener("change", event => {
 
     // Read file
     reader.readAsText(event.target.files[0]);
+
+    // Clear input value to allow for more uploads
+    caseUpload.value = null;
 });
 
 
