@@ -80,7 +80,7 @@
         <code
             style="overflow-wrap: break-word; word-wrap: break-word;"><a class="inline-link" style="text-decoration: underline;" href="https://zeppelin.gg/dashboard">https://zeppelin.gg/dashboard</a>/guilds/{guild_id}/import-export</code>
         <br>
-        This file consists of <code>{ cases: [...] }</code> where <code>cases</code> is the array of cases.
+        This file consists of <code>{ "cases": [...] }</code> where <code>cases</code> is the array of cases.
         <br>
         There is currently no case age filter. To filter a range of cases, you can remove cases from the
         <code>cases</code> array in the export file.
@@ -112,12 +112,12 @@
 </pre>
         You can use this format if you want to specify the mod's name manually.
         <br>
-        Each object must have the properties <code>"id"</code> and
-        <code>"name"</code>.
+        Each object must have the properties <code>id</code> and
+        <code>name</code>.
         <br>
-        The <code>"id"</code> property is the Discord user ID of the moderator you want to view.
+        The <code>id</code> property is the Discord user ID of the moderator you want to view.
         <br>
-        The <code>"name"</code> property is the name you want to assign to this moderator. The name can be whatever.
+        The <code>name</code> property is the name you want to assign to this moderator. The name can be whatever.
         <br>
         ⚠ Both values need to be strings. ⚠
 
@@ -180,9 +180,10 @@
 }
 </pre>
 
-        <br>
-        This website uses the <code>"type"</code> property in each case to calculate the amounts of specific case types.
-        <br>
+        The relevant properties that this website uses are <code>user_id</code>, <code>mod_id</code>,
+        <code>mod_name</code>, and
+        <code>type</code>. These are all expected at the root level of each case object.
+        <br><br>
         The Zeppelin case types are as follows:
 
         <pre class="code-block">
