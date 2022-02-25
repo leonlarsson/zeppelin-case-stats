@@ -189,9 +189,24 @@ caseUpload.addEventListener("change", event => {
 });
 
 
-// Reload the window (a lot of hassle trying to reset everything)
+// Reset the page and clear the table
 resetButton.addEventListener("click", () => {
-    window.location.reload();
+
+    // Clear some variables
+    modsList = null;
+    typeOfModFile = null;
+
+    // Set element visibility, and uncheck checkbox
+    helpText.hidden = false;
+    allModsCheckbox.hidden = false;
+    allModsCheckbox.checked = false;
+    allModsCheckboxText.hidden = false;
+    modsUploadButton.hidden = false;
+    caseUploadButton.hidden = true;
+    resetButton.hidden = true;
+
+    // Clear table
+    coolTable.clearData();
 });
 
 // Download table data as JSON
