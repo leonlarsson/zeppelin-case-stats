@@ -33,7 +33,7 @@ const usePagination = !localStorage.getItem("usePagination") || localStorage.get
 
 // Create the table
 const coolTable = new Tabulator(table, {
-    pagination: "local",
+    pagination: usePagination,
     paginationSize: 20,
     paginationCounter: "rows",
     placeholder: "Upload some data for me.",
