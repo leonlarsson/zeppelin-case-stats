@@ -174,7 +174,7 @@ caseUpload.addEventListener("change", event => {
                 DELETED: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.DELETED).length,
                 SOFTBAN: caseData.cases.filter(inf => inf.type === ZeppelinCaseTypes.SOFTBAN).length
             },
-            explaination: "totalCases: total cases for server. totalModCases: total cases where a moderator took action. totalMods: number of unique mods with at least 1 case. totalCaseCounts: amount of each case type from totalCases."
+            explanation: "totalCases: total cases for server. totalModCases: total cases where a moderator took action. totalMods: number of unique mods with at least 1 case. totalCaseCounts: amount of each case type from totalCases."
         };
 
         // For each found mod or mod in the specified list, populate the data array with values to send to the table
