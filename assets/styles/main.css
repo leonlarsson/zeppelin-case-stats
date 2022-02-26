@@ -76,3 +76,25 @@ code {
 .buttonRed:active {
   background-color: #be3537;
 }
+
+@media only screen and (max-width: 900px) {
+  body {
+    margin: 0;
+    padding: 1em 1em;
+  }
+
+  .upper-text {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  body {
+    margin: 0;
+    padding: 1em 0.5em;
+  }
+
+  .upper-text {
+    font-size: 1em;
+  }
+}
