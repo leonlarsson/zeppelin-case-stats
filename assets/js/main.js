@@ -24,9 +24,7 @@ const calcSumNumbers = values => {
     return sum;
 }
 
-const calcSumMods = values => {
-    return values.length + " moderators";
-}
+const calcSumMods = values => `${values.length} moderators`;
 
 // Do not use pagination if the localStorage setting overrides it (is set to false)
 const usePagination = !localStorage.getItem("usePagination") || localStorage.getItem("usePagination") === "true" ? true : false;

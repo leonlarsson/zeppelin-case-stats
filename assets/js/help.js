@@ -1,12 +1,8 @@
 const table = document.getElementById("caseTableHelp");
 
-const calcSumNumbers = () => {
-    return "SUM OF BELOW";
-}
+const calcSumNumbers = () => "SUM OF BELOW";
 
-const calcSumMods = () => {
-    return "X MODERATORS";
-}
+const calcSumMods = () => "X MODERATORS";
 
 // Create the table
 const coolTable = new Tabulator(table, {
